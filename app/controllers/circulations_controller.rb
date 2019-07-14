@@ -10,13 +10,13 @@ class CirculationsController < ApplicationController
 
   def new
     @circulation = Circulation.new
-    @circulation.checkout_date = Date.today.to_s
+    @circulation.checkout_date = Date.today
   end
 
   def create
     @circulation = Circulation.new(circulation_params)
     if @circulation.save
-      flash[:success] = "図書館サービスへようこそ!"
+      flash[:success] = "本を貸し出しました!"
       redirect_to @circulation
     else
       render 'new'
@@ -39,7 +39,7 @@ class CirculationsController < ApplicationController
 
   def return
     @circulation = Circulation.find(params[:id])
-    if @circulation.update(return_date: Date.today.to_s)
+    if @circulation.update(return_date: Date.today)
       flash[:success] = "本を返却しました！"
       redirect_to circulations_url
     else
