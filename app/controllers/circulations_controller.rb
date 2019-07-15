@@ -16,7 +16,7 @@ class CirculationsController < ApplicationController
   def create
     @circulation = Circulation.new(circulation_params)
     if @circulation.save
-      flash[:success] = "本を貸し出しました!"
+      flash[:success] = "本を借りました!"
       redirect_to @circulation
     else
       render 'new'
@@ -30,7 +30,7 @@ class CirculationsController < ApplicationController
   def update
     @circulation = Circulation.find(params[:id])
     if @circulation.update_attributes(circulation_params)
-      flash[:success] = "貸出情報が更新されました！"
+      flash[:success] = "貸出情報を更新しました！"
       redirect_to @circulation
     else
       render 'edit'
@@ -58,7 +58,7 @@ class CirculationsController < ApplicationController
     def circulation_params
       params.require(:circulation).permit(
         :user_name,
-        :book_name,
+        :book_title,
         :checkout_date,
         :return_date
       )
